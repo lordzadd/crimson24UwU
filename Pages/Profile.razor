@@ -30,7 +30,7 @@
 @code {
 
     [CascadingParameter]
-    public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    public Task<AuthenticationState>? AuthenticationStateTask { get; set; }
     private string Username = "";
     private string EmailAddress = "";
     private string Picture = "";
@@ -38,23 +38,48 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var state = await AuthenticationStateTask;
+        if (AuthenticationStateTask != null)
+        {
+            var state = await AuthenticationStateTask;
+            Username = state.User?.Identity?.Name ?? string.Empty;
 
-        Username = state.User.Identity.Name ?? string.Empty;
-        EmailAddress = state.User.Claims
-            .Where(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Email))
-            .Select(c => c.Value)
-            .FirstOrDefault() ?? string.Empty;
+            if (state.User != null)
+            {
+                EmailAddress = state.User.Claims
+                    .Where(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Email))
+                    .Select(c => c.Value)
+                    .FirstOrDefault() ?? string.Empty;
 
-        Picture = state.User.Claims
-            .Where(c => c.Type.Equals("picture"))
-            .Select(c => c.Value)
-            .FirstOrDefault() ?? string.Empty;
+                Picture = state.User.Claims
+                    .Where(c => c.Type.Equals("picture"))
+                    .Select(c => c.Value)
+                    .FirstOrDefault() ?? string.Empty;
+            }
+        }
+        
+        
+        // var state = await AuthenticationStateTask;
+        // if (state != null)
+        // {
+        //     Username = state.User?.Identity?.Name ?? string.Empty;
 
+        //     if (state.User != null)
+        //     {
+        //         EmailAddress = state.User.Claims
+        //             .Where(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Email))
+        //             .Select(c => c.Value)
+        //             .FirstOrDefault() ?? string.Empty;
 
-        IdToken = tokenProvider.IdToken;
+        //         Picture = state.User.Claims
+        //             .Where(c => c.Type.Equals("picture"))
+        //             .Select(c => c.Value)
+        //             .FirstOrDefault() ?? string.Empty;
+        //     }
+        // }
+
+        IdToken = tokenProvider.IdToken ?? string.Empty;
 
         await base.OnInitializedAsync();
     }
-}
 
+}
