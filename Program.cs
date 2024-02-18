@@ -15,7 +15,7 @@ builder.Services.AddAuth0WebAppAuthentication(options =>
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<Profile>();
+builder.Services.AddSingleton<siteProfile>();
 builder.Services.AddScoped<TokenProvider>();
 
 var app = builder.Build();

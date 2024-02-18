@@ -1,6 +1,7 @@
 ﻿@page "/Profile"
 @inject TokenProvider tokenProvider
 @attribute [Authorize]
+@inject siteProfile zProfile
 
 <PageTitle>Profile</PageTitle>
 
@@ -40,6 +41,7 @@
         var state = await AuthenticationStateTask;
 
         Username = state.User.Identity.Name ?? string.Empty;
+        zProfile.username = Username;
         EmailAddress = state.User.Claims
             .Where(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Email))
             .Select(c => c.Value)

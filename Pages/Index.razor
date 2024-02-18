@@ -1,11 +1,15 @@
 ﻿@page "/"
+@inject siteProfile zProfile
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Landing</PageTitle>
 
 <div class="row">
     <div class="col-md-12">
-        <h2 class="mt-4">RAWR UWU XD OWO MEOW Owo NYA uwU NEKO OwU-CHAN TeeHee UwU UwO Ehe~ Kawaii ~~</h2>
+        <h2>@zProfile.username</h2>
         <p>To follow along in building this sample please <a href="https://auth0.com/docs/quickstart/webapp/aspnet-core-blazor">refer to the Quickstart</a>.</p>
     </div>
+    <form method="post" asp-page="/HouseSelect">
+        <button type="submit">Redirect</button>    
+    </form>
 </div>
 

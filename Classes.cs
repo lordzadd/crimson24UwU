@@ -29,14 +29,14 @@ namespace Auth0_Blazor
         Other
     }
 
-    public class Profile
+    public class siteProfile
     {
-        public Profile()
+        public siteProfile()
         {
             username = "";
             house = new House();
         }
-        private string username;
+        public string username;
         public House house { get; set; }
     }
 
