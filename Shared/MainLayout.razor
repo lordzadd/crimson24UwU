@@ -23,6 +23,10 @@
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        zProfile.username = user.Identity.Name;
+
+        if (user.Identity != null && user.Identity.Name != null)
+        {
+            zProfile.username = user.Identity.Name;
+        }
     }
 }

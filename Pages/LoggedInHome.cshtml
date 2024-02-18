@@ -1,4 +1,5 @@
-﻿@page "/LoggedInHome"
+﻿
+@page "/LoggedInHome"
 @model Auth0_Blazor.Pages.LoggedInHomeModel
 
 @{
@@ -12,10 +13,48 @@
     <link href="~/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
 </head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Ha I got it to send you to another site.</p>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Ha I got it to send you to another site</a>.</p>
-</div>
+    <form method="post">
+        <input asp-for="NewTodo" />
+        <button type="submit" asp-page-handler="AddTodo">Add</button>
+    </form>
 
+    <ul>
+        @for (int i = 0; i < Model.Todos.Count; i++)
+        {
+            <li>
+                <input type="checkbox" asp-for="@Model.Todos[i].IsDone" />
+                <input asp-for="@Model.Todos[i].Text" />
+            </li>
+        }
+    </ul>
+</body>
 </html>
+
+@* @code {
+    string newTodo;
+    List<Todo>
+    todos = new List<Todo>
+        ();
+
+        void AddTodo(KeyboardEventArgs e)
+        {
+        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(newTodo))
+        {
+        todos.Add(new Todo { Text = newTodo });
+        newTodo = string.Empty;
+        }
+        }
+
+        class Todo
+        {
+        public string Text { get; set; }
+        public bool IsDone { get; set; }
+        }
+        }
+ *@
