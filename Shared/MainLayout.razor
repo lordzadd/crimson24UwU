@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject siteProfile zProfile
 
 <PageTitle>SampleBlazorApp</PageTitle>
 
@@ -22,6 +23,6 @@
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-
+        zProfile.username = user.Identity.Name;
     }
 }

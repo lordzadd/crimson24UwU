@@ -1,6 +1,6 @@
 
-using Microsoft.AspNetCore.Authentication;
 using Auth0.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Auth0_Blazor.Pages
