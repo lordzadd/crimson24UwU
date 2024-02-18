@@ -7,7 +7,7 @@ namespace Auth0_Blazor.Pages
 {
     public class LoginModel : PageModel
     {
-        public async Task OnGet(string redirectUri)
+        public async Task OnGet(string redirectUri = "/LoggedInHome")
         {
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
                 .WithRedirectUri(redirectUri)
